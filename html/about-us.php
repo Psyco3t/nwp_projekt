@@ -35,8 +35,9 @@ $selectedTours=fetchFromList($uid);
                     //session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                     {
-                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                         echo '<li class="nav-item"><a class="nav-link" href="../html/about-us.php">Tour Cart</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../html/favorites.php">Favorites</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                     }
                     else
                     {
@@ -88,9 +89,7 @@ $selectedTours=fetchFromList($uid);
                                 <form method="post" action="../php/removeFromList.php?row=<?php echo $row?>&aId=<?php echo $selectedTours[$row]['attraction_id']?>">
                                     <button type="submit" name="remove" class="btn btn-primary-diveTours">Remove</button>
                                 </form>
-                                <form style="margin-top: 15px; margin-bottom: 15px" method="post" action="">
-                                    <button type="submit" name="remove" class="btn btn-primary-diveTours">Favorite</button>
-                                </form>
+
                             </div>
                         </div>
                         <?php
@@ -167,3 +166,4 @@ $selectedTours=fetchFromList($uid);
 </body>
 
 </html>
+<!--<a class="lightbox" href="assets/img/scenery/image1.jpg"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/image1.jpg"></a> -->

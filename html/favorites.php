@@ -1,32 +1,9 @@
 <?php
-if(isset($_GET['token'])) {
-    require_once '../php/config.php';
-    require_once '../php/db_config.php';
-    session_start();
-    //$token = $_SESSION['token'];
-    $token=$_GET['token'];
-    //$userID = $_SESSION['lastInsert'];
-    try {
-        $pdo = new PDO($dsn, 'root', '');
-        $sql="SELECT * FROM users WHERE activationToken='$token'";
-        $inject=$pdo->prepare($sql);
-
-        $inject->execute();
-
-        $result=$inject->fetchAll();
-        if(isset($result))
-        {
-            $sql="UPDATE users
-            SET active='1'
-            WHERE activationToken='$token'";
-            $stmnt=$pdo->prepare($sql);
-            $stmnt->execute();
-        }
-
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}
+require_once '../php/functions.php';
+session_start();
+$attractions=GetAttractions();
+$uid=$_SESSION['uid'];
+$selectedTours=fetchFromFavorites($uid);
 
 ?>
 <!DOCTYPE html>
@@ -35,13 +12,15 @@ if(isset($_GET['token'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login - Tour Dive</title>
+    <title>Favorites - Tour Dive</title>
     <meta name="description" content="Welcome to Tour Dive [INSERT FLUFF HERE]">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Montserrat.css">
+    <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/tourDive.css">
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
@@ -51,9 +30,9 @@ if(isset($_GET['token'])) {
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../html/gallery.php">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
                     <?php
-                    session_start();
+                    //session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                     {
                         echo '<li class="nav-item"><a class="nav-link" href="../html/about-us.php">Tour Cart</a></li>';
@@ -78,46 +57,64 @@ if(isset($_GET['token'])) {
             </div>
         </div>
     </nav>
-    <main class="page login-page">
-        <section class="clean-block clean-form dark" style="background: #5eb1bfca;">
-            <?php
-            if(isset($_GET['success']) and $_GET['success']==2) {
-                echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Your Password has been reset.</strong><br /></span></div>';
-            }
-            ?>
-            <?php
-            if(isset($_GET['success']) and $_GET['success']==1) {
-                echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Check your inbox for the reset token.</strong><br /></span></div>';
-
-            }
-            ?>
-            <?php
-            if(isset($_GET['error']) and $_GET['error']==1) {
-            echo '<div class="alert alert-warning text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Wrong password or email entered.</strong><br /></span></div>';
-
-            }
-            ?>
-            <?php
-            if(isset($_GET['error']) and $_GET['error']==2) {
-                echo '<div class="alert alert-warning text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Your account has been deactivated for more info contact us through email.</strong><br /></span></div>';
-
-            }
-            ?>
+    <main class="page pricing-table-page">
+        <section class="clean-block clean-pricing dark" style="background: #cdedf6;">
             <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-primary">Log In</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <div class="block-heading-fulcrum">
+                    <h2 class="text-info">Favorited tours</h2>
                 </div>
-                <form style="background: rgba(255,255,255,0.76);" action="../php/UAC/login.php" method="post">
-                    <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email"></div>
-                    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password" name="password"></div>
-                    <div class="mb-3" style="margin-top: -8px;margin-bottom: 0px;">
-                        <div class="form-check" style="padding-right: 0px;margin-right: 259px;"><input class="form-check-input" type="checkbox" id="checkbox"><label class="form-check-label" for="checkbox">Remember me</label></div>
+                <div class="row justify-content-center">
+                    <?php for($row=0;$row<count($selectedTours);$row++)
+                    {
+                    ?>
+                    <div class="container-md travelItem" style="">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <img class="AutoSize-image" src="../uploads/<?php echo $selectedTours[$row]['image']; ?>"  alt="test">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="locationName">
+                                    <h4><?php echo $selectedTours[$row]['name']?></h4>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Description:</p>
+                                <p><?php echo $selectedTours[$row]['details']?></p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Location:</p>
+                                <p><?php echo $selectedTours[$row]['address']?></p>
+                            </div>
+                            <div class="col-md-4">
+                                <form method="post" action="../php/removeFromfavorites.php?row=<?php echo $row?>&aId=<?php echo $selectedTours[$row]['attraction_id']?>">
+                                    <button type="submit" name="remove" class="btn btn-primary-diveTours">Remove</button>
+                                </form>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                         ?>
+                        <div class="container-md " style="padding-bottom: 200px">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
                     </div>
-                    <div style="margin-bottom: 11px;padding-top: 0px;margin-top: -1px;overflow: visible;margin-left: 0px;display: inline-block;"><a href="password_reset.php" style="display: inline-block;">I forgot my password</a><a href="registration.php" style="padding-left: 0px;margin-left: 171px;display: inline-block;">Sign up</a></div><button class="btn btn-primary btn-tourDive-loginbtn" type="submit">Login</button>
-                    <a href="agencyLogin.php" class="btn btn-tourDive-loginbtn">AgencyLogin</a>
-                </form>
+                </div>
             </div>
+
         </section>
     </main>
     <footer class="page-footer dark">
@@ -168,3 +165,4 @@ if(isset($_GET['token'])) {
 </body>
 
 </html>
+<!--<a class="lightbox" href="assets/img/scenery/image1.jpg"><img class="img-thumbnail img-fluid image" src="assets/img/scenery/image1.jpg"></a> -->

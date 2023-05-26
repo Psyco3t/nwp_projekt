@@ -1,7 +1,7 @@
 <?php
 require_once '../php/functions.php';
 session_start();
-$attractions=GetAttractions();
+$attractions=getActiveAttractions();
 $row=$_GET['row'];
 
 $latitude=$attractions[$row]['latitude'];
@@ -49,8 +49,9 @@ else
                 //session_start();
                 if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                 {
-                    echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                     echo '<li class="nav-item"><a class="nav-link" href="../html/about-us.php">Tour Cart</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link nav-link" href="../html/favorites.php">Favorites</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                 }
                 else
                 {
@@ -80,6 +81,16 @@ else
         <?php
         if(isset($_GET['success']) and $_GET['success']==1) {
             echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Attraction has been added.</strong><br /></span></div>';
+        }
+        ?>
+        <?php
+        if(isset($_GET['success']) and $_GET['success']==2) {
+            echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Attraction has been added to favorites.</strong><br /></span></div>';
+        }
+        ?>
+        <?php
+        if(isset($_GET['failure']) and $_GET['failure']==3) {
+            echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Attraction already been added to your favorites.</strong><br /></span></div>';
         }
         ?>
         <?php
@@ -117,6 +128,11 @@ else
                             <div class=col-md-4>
                                 <form method="post" action="../php/addToTourList.php?row=<?php echo $row?>">
                                 <button class="btn btn-primary-diveTours d-block w-100" type="submit">Add to TourList</button>
+                                </form>
+                            </div>
+                            <div class=col-md-2>
+                                <form method="post" action="../php/addFavorite.php?row=<?php echo $row?>">
+                                    <button class="btn btn-primary-diveTours d-block w-100" type="submit">Add to Favorites</button>
                                 </form>
                             </div>
                             <div class="col-md-3">
