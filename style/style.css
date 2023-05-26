@@ -1,0 +1,112 @@
+darkGreen
+{
+    color: #042A2B;
+}
+moonStone
+{
+    color: #5EB1BF;
+}
+lightCyan{
+    color: #CDEDF6;
+}
+orange{
+    color: #EF7B45;
+}
+chillRed{
+    color: #D84727;
+}
+
+.block-heading-fulcrum{padding-top:40px;margin-bottom:40px;text-align:center}
+.item-spacing
+{
+    padding-bottom:10px ;
+}
+.landscape{
+    height: 120px;
+    width: auto;
+    justify-content: center;
+    display: flex;
+}
+.travelItem{
+    background: white;
+    border-top:2px solid #5ea4f3;
+    overflow: hidden;
+    padding: 30px;
+    position: relative;
+    border-radius: 25px;
+    margin-bottom: 15px;
+}
+.AutoSize-image{
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 20%;
+    min-width: 20%;
+    padding-top: 10px;
+}
+.tourPage-image{
+    width: 50%;
+    height: 50%;
+    min-height: 20%;
+    min-width: 20%;
+    padding-top: 10px;
+}
+#tourImage{
+    max-height: 100%;
+    max-width: 100%;
+    align-items: center;
+}
+.row-listing{
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+}
+.btn-tourpage
+{
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.item-description
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.locationName{
+    text-align: center;
+    color: #2288f9;
+    font-size: 45px;
+    margin: 15px;
+}
+.locationPrice{
+    text-align: center;
+    color: #2288f9;
+    font-size: 45px;
+    margin: 15px;
+    border-radius: 10px;
+    border: 1px solid #2288f9;
+}
+#map {
+    height: 100%;
+}
+.comment{
+    border-radius: 5px;
+    margin: 15px;
+    border: 1px solid #2288f9;
+}
+.commenter{
+    text-align: left;
+    color: #2288f9;
+    font-size: 23px;
+    margin: 15px;
+    border-radius: 10px;
+    border: 1px solid #2288f9;
+}
+
+.postcomment{
+    border-radius: 5px;
+    margin: 15px;
+    border: 1px solid #2288f9;
+    padding: 10px;
+}
+.heading{font-size:20px;font-weight:bold;padding-bottom:20px;text-align: center}
+.clean-pricing-item-fulcrum{border-radius: 15px; background-color:#fff;box-shadow:0px 2px 10px rgba(0,0,0,.075);border-top:2px solid #5ea4f3;padding:30px;overflow:hidden;position:relative}.clean-block.clean-pricing .col-md-5:not(:last-child) .item{margin-bottom:30px}.clean-pricing-item-fulcrum button{font-weight:600}.clean-pricing-item-fulcrum .ribbon{width:160px;height:32px;font-size:12px;text-align:center;color:#fff;font-weight:bold;box-shadow:0px 2px 3px rgba(136,136,136,.25);background:#4dbe3b;transform:rotate(45deg);position:absolute;right:-42px;top:20px;padding-top:7px}.clean-pricing-item-fulcrum p{text-align:center;margin-top:20px;opacity:.7}.clean-pricing-item-fulcrum .features .feature{font-weight:600}.clean-pricing-item-fulcrum .features h4,.clean-pricing-item-fulcrum .features .h4{text-align:center;font-size:18px;padding:5px}.clean-pricing-item-fulcrum .price h4,.clean-pricing-item-fulcrum .price .h4{margin:15px 0;font-size:45px;text-align:center;color:#2288f9}.clean-pricing-item-fulcrum .buy-now button{text-align:center;margin:auto;font-weight:600;padding:9px 0}.clean-block.payment-form form{border-top:2px solid #5ea4f3;box-shadow:0px 2px 10px rgba(0,0,0,.075);background-color:#fff;padding:0;max-width:600px;margin:auto}.clean-block.payment-form .title{font-size:1em;border-bottom:1px solid rgba(0,0,0,.1);margin-bottom:.8em;font-weight:600;padding-bottom:8px}

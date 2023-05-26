@@ -1,0 +1,12 @@
+{
+  "require": {
+    "mobiledetect/mobiledetectlib": "^3.74",
+    "phpmailer/phpmailer": "^6.8",
+    "ext-mysqli": "*",
+    "ext-pdo": "*"
+  },
+  "autoload": {
+    "files": ["vendor/mobiledetect/mobiledetectlib/src/MobileDetect.php",
+      "vendor/phpmailer/phpmailer/src/PHPMailer.php"]
+  }
+}
