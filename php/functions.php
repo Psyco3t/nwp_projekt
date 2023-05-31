@@ -255,3 +255,23 @@ function fetchFromList($userID)
     $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
     return PDOexec("SELECT * FROM attractions INNER JOIN tours ON attractions.attraction_id=tours.attraction_id INNER JOIN users ON tours.user_id=users.id_user WHERE user_id='$userID'")->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function fetchFromFavorites($userID)
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT * FROM attractions INNER JOIN favorites ON attractions.attraction_id=favorites.attraction_id INNER JOIN users ON favorites.user_id=users.id_user WHERE user_id='$userID'")->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getActiveAttractions()
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT  attraction_id,city_id,name,details,address,latitude,longitude,active,agency_id,image FROM attractions WHERE active='enable'")->fetchAll(PDO::FETCH_ASSOC);
+}

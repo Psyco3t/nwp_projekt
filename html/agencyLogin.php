@@ -56,8 +56,9 @@ if(isset($_GET['token'])) {
                 session_start();
                 if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                 {
-                    echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                     echo '<li class="nav-item"><a class="nav-link" href="../html/about-us.php">Tour Cart</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link nav-link" href="../html/favorites.php">Favorites</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                 }
                 else
                 {
