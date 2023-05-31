@@ -54,23 +54,28 @@ if(isset($_GET['token'])) {
                     <li class="nav-item"><a class="nav-link" href="../html/gallery.php">Gallery</a></li>
                     <?php
                     session_start();
-                    if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
+                    if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
                     {
-                        echo '<li class="nav-item"><a class="nav-link" href="../html/about-us.php">Tour Cart</a></li>';
-                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../html/favorites.php">Favorites</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="agencyAdmin.php">Admin</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
+                    }
+                    elseif (isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
+                    {
+                        echo '<li class="nav-item"><a class="nav-link" href="about-us.php">Tour Cart</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="favorites.php">Favorites</a></li>';
                         echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                     }
                     else
                     {
-                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../html/login.php">Login</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="login.php">Login</a></li>';
                     }
                     ?>
-                    <li class="nav-item"><a class="nav-link" href="../html/faq.php">FAQ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../html/contact-us.php">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.php">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact-us.php">Contact Us</a></li>
                     <?php
                     if(isset($_SESSION['admin']) and $_SESSION['admin']==true)
                     {
-                        echo '<li class="nav-item"><a class="nav-link nav-link" href="../html/admin.php">Admin</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link nav-link" href="admin.php">Admin</a></li>';
                     }
                     ?>
                 </ul>

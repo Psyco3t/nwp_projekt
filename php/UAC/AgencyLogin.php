@@ -29,6 +29,9 @@ if (password_verify($password, $result) == true and $emailCheck === $name) {
     {
         session_start();
         $_SESSION['loggedIN'] = true;
+        $_SESSION['isAgency']=true;
+        $id=PDOexec("SELECT agency_id from agencies where name='$name'")->fetchColumn();
+        $_SESSION['agencyID']=$id;
         //$name = PDOexec("SELECT agency_id FROM agencies WHERE name='$name'")->fetchColumn();
         //LogRecord($name);
         header('Location:../../index.php');
