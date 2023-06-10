@@ -23,5 +23,13 @@ if (move_uploaded_file($_FILES[$row.'Image']['tmp_name'], $target)) {
 }else{
     $msg = "Failed to upload image";
 }
-header('Location:../../html/admin.php?ViewAttractions');
+$uri=$_SESSION['referer'];
+if(str_contains($uri, 'agencyAdmin.php'))
+{
+    header('Location:../../html/agencyAdmin.php?ViewAttractions');
+}
+else
+{
+    header('Location:../../html/admin.php?ViewAttractions');
+}
 exit();

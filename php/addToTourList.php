@@ -21,6 +21,10 @@ else if ($rowCount>0)
 else
 {
     PDOexec("INSERT INTO tours (attraction_id,user_id) VALUES('$attractId','$uid')");
+    $count=PDOexec("SELECT viewCount from attractions WHERE attraction_id='$attractId'")->fetchColumn();
+    echo $count;
+    $count=$count+1;
+    updateView($attractId, $count);
     header("Location:../html/tourPage.php?row=$getRow&success=1");
     exit();
 }

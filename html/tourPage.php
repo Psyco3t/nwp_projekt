@@ -20,6 +20,8 @@ else
 {
     $comments=false;
 }
+$images=selectImages($attractions[$row]['attraction_id']);
+$columnNum=countImages($attractions[$row]['attraction_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -150,16 +152,40 @@ else
                             <p>Gallery</p>
                             <div class="row align-items-start">
                                 <div class="col-md-2">
-                                    <img id="tourImage" src="../uploads/default.jpg" alt="test">
+                                    <?php if($columnNum>0)
+                                    {
+                                        echo '<img id="tourImage" data-mdb-img="../uploads/'.$images[0]['image'].'" src="../uploads/'.$images[0]['image'].'" class=lightbox alt="test">';
+                                    }
+                                    else
+                                        echo '<img id="tourImage" src="../uploads/default.jpg" class=lightbox alt="test">';
+                                    ?>
                                 </div>
                                 <div class="col-md-2">
-                                    <img id="tourImage" src="../uploads/default.jpg" alt="test">
+                                    <?php if($columnNum>0)
+                                    {
+                                        echo '<img id="tourImage" data-mdb-img="../uploads/'.$images[1]['image'].'" src="../uploads/'.$images[1]['image'].'" class=lightbox alt="test">';
+                                    }
+                                    else
+                                        echo '<img id="tourImage" src="../uploads/default.jpg" class=lightbox alt="test">';
+                                    ?>
                                 </div>
                                 <div class="col-md-2">
-                                    <img id="tourImage" src="../uploads/default.jpg" alt="test">
+                                    <?php if($columnNum>0)
+                                    {
+                                        echo '<img id="tourImage" data-mdb-img="../uploads/'.$images[2]['image'].'" src="../uploads/'.$images[2]['image'].'" class=lightbox alt="test">';
+                                    }
+                                    else
+                                        echo '<img id="tourImage" src="../uploads/default.jpg" class=lightbox alt="test">';
+                                    ?>
                                 </div>
                                 <div class="col-md-2">
-                                    <img id="tourImage" src="../uploads/default.jpg" alt="test">
+                                    <?php if($columnNum>0)
+                                    {
+                                        echo '<img id="tourImage" data-mdb-img="../uploads/'.$images[3]['image'].'" src="../uploads/'.$images[3]['image'].'" class=lightbox alt="test">';
+                                    }
+                                    else
+                                        echo '<img id="tourImage" src="../uploads/default.jpg" class=lightbox alt="test">';
+                                    ?>
                                 </div>
                             </div>
                             <div class="col-md">

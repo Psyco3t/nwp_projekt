@@ -79,7 +79,7 @@ if(array_key_exists('editAttraction', $_POST))
 
 </style>
 
-<body>
+<body style="background-color: lightgrey">
     <div style="display: inline-flex;flex: auto;width: 100%;">
         <div style="width: fit-content;max-width: 20%;overflow-y: visible;display: inline-block;position: absolute;top: 74px;">
             <div class="accordion" role="tablist" id="accordion-1" style="margin-right: 1px;font-size: 16px;overflow: visible;display: inline-block;position: relative;">
@@ -126,7 +126,7 @@ if(array_key_exists('editAttraction', $_POST))
                             </svg></span><span>Tour Dive</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-5">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="admin.php?Contacts">Contact Page</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
                         </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Button</a>
@@ -461,6 +461,37 @@ if(array_key_exists('editAttraction', $_POST))
                                                     }
 
                                                     }?>
+                                                    <?php
+                                                    if (isset($_GET['Contacts']))
+                                                    $contacts=getContacts();
+                                                    {?>
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Subject</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Message</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <?php
+                                                        for($row=0;count($contacts)>$row;$row++)
+                                                        {
+                                                        echo '<tr>';
+                                                            foreach ($contacts[$row] as $key=>$item)
+                                                            {
+
+                                                                echo '<td>'.$item.'</td>';
+                                                            }?>
+                                                        <form method="post" action="../php/UAC/deleteContact.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
+                                                        <?php echo '</tr>';
+                                                        }?>
+                                                        </tbody>
+                                                    </table>
+                                                    <?php }
+                                                    ?>
 
      </div>
     </div>
