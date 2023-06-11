@@ -25,7 +25,7 @@ $attractions=GetAttractions();
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link active" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>-->
                     <?php
                     session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -62,7 +62,7 @@ $attractions=GetAttractions();
             <div class="container">
                 <div class="block-heading-fulcrum">
                     <h2 class="text-info">Tours</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                    <p>Here you can check and browse all available tours.</p>
                 </div>
                 <div class="row justify-content-center">
                     <?php for($row=0;$row<count($attractions);$row++)

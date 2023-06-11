@@ -24,10 +24,10 @@
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Password Reset</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                    <p>Please enter your email address below.</p>
                 </div>
                 <form action="../php/reset.php" method="post">
-                    <div class="mb-3"><label class="form-label" for="name">E-Mail</label><input class="form-control item" type="text" id="email" name="email"></div>
+                    <div class="mb-3"><label class="form-label" for="name">E-Mail</label><input required class="form-control item" type="text" id="email" name="email"></div>
                     <button class="btn btn-primary btn-tourDive-loginbtn" type="submit">Continue</button>
                 </form>
             </div>

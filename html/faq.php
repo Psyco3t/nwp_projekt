@@ -20,7 +20,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>-->
                     <?php
                     session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -57,26 +57,26 @@
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">FAQ</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                    <p>Here we go through a few of your questions and try to answer them to the best of our ability</p>
                 </div>
                 <div class="block-content">
                     <div class="faq-item">
-                        <h4 class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+                        <h4 class="question"><b>Q: How do i leave a comment on a location or create a location?</b></h4>
                         <div class="answer">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p>The only way you can leave a comment on a location is by being signed in if you are an agency rank user you cannot comment on your own location.</p>
+                            <p>You have to be an agency rank user to add a location to the roster please contact our admin team about it <a href="contact-us.php">here</a>.</p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <h4 class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+                        <h4 class="question">Q: I forgot my password</h4>
                         <div class="answer">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                            <p>You can reset your password if you still have access to your email address <a href="login.php">here</a></p>
                         </div>
                     </div>
                     <div class="faq-item">
-                        <h4 class="question">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h4>
+                        <h4 class="question">Q: I require help with managing my location.</h4>
                         <div class="answer">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p>You can get in touch with our admin team at our <a href="contact-us.php">contact us page</a>.</p>
                         </div>
                     </div>
                 </div>

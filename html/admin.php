@@ -127,7 +127,7 @@ if(array_key_exists('editAttraction', $_POST))
                     <div class="collapse navbar-collapse" id="navcol-5">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item"><a class="nav-link active" href="admin.php?Contacts">Contact Page</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Generate QR code</a></li>
                             <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
                         </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Button</a>
                     </div>
@@ -162,7 +162,7 @@ if(array_key_exists('editAttraction', $_POST))
             echo '<td>'.$item.'</td>';
         }
         ?>
-        <form method="post" action="../php/rowDelete.php?row=<?php echo $row?>"> <td> <input type="submit" name="deleteBtn" value="delete"> </td> </form>
+        <form method="post" action="../php/rowDelete.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
         <?php
         echo '</tr>';
         }
@@ -196,7 +196,7 @@ if(array_key_exists('editAttraction', $_POST))
                         echo '<td>'.'<input class="form-control" type="text" name="'.$row.'email" value='.$logins[$row]['email'].'></td>';
                         echo '<td>'.'<select class="form-control" name="'.$row.'permissions" ><option selected value="'.$logins[$row]['permissions'].'">'.$logins[$row]['permissions'].'</option> <option value="admin">admin</option> <option value="registered">registered</option> <option value="agency">agency</option> </select></td>';
                         echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<input class="form-control" type="text" name="'.$row.'active" value="'.$logins[$row]['active'].'"></td>';
-                        echo '<td> <input class="btn-primary" type="submit" name="edit" value="Edit"> </td> </form>' ?>
+                        echo '<td> <input class="btn btn-secondary" type="submit" name="edit" value="Edit"> </td> </form>' ?>
                         <?php
                         echo '</tr>';
                     }
@@ -226,7 +226,7 @@ if(array_key_exists('editAttraction', $_POST))
                                 echo '<td>'.$item.'</td>';
                             }
                             ?>
-                            <form method="post" action="../php/UAC/agencyList.php?row=<?php echo $row?>"> <td> <input type="submit" name="deleteBtn" value="delete"> </td> </form>
+                            <form method="post" action="../php/UAC/agencyList.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
                             <?php
                             echo '</tr>';
                         }
@@ -261,7 +261,7 @@ if(array_key_exists('editAttraction', $_POST))
                                 echo '<td>'.'<select class="form-select" name="'.$row.'cities" ><option selected value="'.$logins [$row]['city_name'].'">'.$logins[$row]['city_name'].'</option>.'; foreach ($cities as $city=>$item){ echo '<option value="'.$item['city_name'].'">'.$item['city_name'].'</option>';}echo '.</select></td>';
                                 echo '<td>'.'<select class="form-select" name="'.$row.'status" ><option selected value="'.$logins[$row]['status'].'">'.$logins[$row]['status'].'</option> <option value="enabled">enabled</option> <option value="disabled">disabled</option> </select></td>';
                                 echo '<td>'.'<input class="form-control" type="file" name="'.$row.'logo" value="'.$logins[$row]['logo'].'"></td>';
-                                echo '<td> <input class="btn-primary" type="submit" name="edit" value="Edit"> </td> </form>' ?>
+                                echo '<td> <input class="btn btn-secondary" type="submit" name="edit" value="Edit"> </td> </form>' ?>
                                 <?php
                                 echo '</tr>';
                             }
@@ -463,7 +463,6 @@ if(array_key_exists('editAttraction', $_POST))
                                                     }?>
                                                     <?php
                                                     if (isset($_GET['Contacts']))
-                                                    $contacts=getContacts();
                                                     {?>
                                                     <table class="table">
                                                         <thead>
@@ -477,6 +476,7 @@ if(array_key_exists('editAttraction', $_POST))
                                                         </thead>
                                                         <tbody>
                                                         <?php
+                                                        $contacts=getContacts();
                                                         for($row=0;count($contacts)>$row;$row++)
                                                         {
                                                         echo '<tr>';

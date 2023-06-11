@@ -46,7 +46,7 @@ $columnNum=countImages($attractions[$row]['attraction_id']);
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="../index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link active" href="Tours.php">Tours</a></li>
-                <li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
+                <!--<li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>-->
                 <?php
                 //session_start();
                 if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -108,7 +108,7 @@ $columnNum=countImages($attractions[$row]['attraction_id']);
         <div class="container">
             <div class="block-heading-fulcrum">
                 <h2 class="text-info">Tours</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <p>Here you can view comments and check the tour info.</p>
             </div>
             <div class="row justify-content-center">
                 <div class="container-md travelItem">
@@ -126,10 +126,10 @@ $columnNum=countImages($attractions[$row]['attraction_id']);
                                 <p>Description: <?php echo $attractions[$row]['details']?></p>
                             </div>
                             <div class=col-md-2>
-                                <p>Location: <?php echo $attractions[$row]['address']?></p>
+                                <p>Location:</p>
                                 <div id="map">
                                 <iframe style="height:100%;width:100%;border:0;" src="https://www.google.com/maps/embed/v1/place?q=+<?php echo $latitude;?>, <?php echo $longitude;?>&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"></iframe>
-                                    <p>address</p>
+                                    <p>Address: <?php echo $attractions[$row]['address']?></p>
                                 </div>
                             </div>
                             <div class=col-md-4>
