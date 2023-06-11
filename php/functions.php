@@ -275,3 +275,62 @@ function getActiveAttractions()
     $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
     return PDOexec("SELECT  attraction_id,city_id,name,details,address,latitude,longitude,active,agency_id,image FROM attractions WHERE active='enable'")->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function ViewAgencyAttractions($id)
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT  attraction_id,city_id,name,details,address,latitude,longitude,active,agency_id,viewCount FROM attractions WHERE agency_id='$id'")->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAgencyName($id)
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT name FROM agencies WHERE agency_id='$id'")->fetchColumn();
+}
+
+function updateView($id,$increment)
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("UPDATE attractions set viewCount='$increment' WHERE attraction_id='$id'")->fetchColumn();
+}
+
+function selectImages($attractID)
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT `image` FROM images WHERE attraction_id='$attractID'")->fetchAll(PDO::FETCH_ASSOC);
+}
+function countImages($attractID)
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT `image` FROM images WHERE attraction_id='$attractID'")->fetchColumn();
+}
+
+function getContacts()
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT * FROM contact")->fetchAll(PDO::FETCH_ASSOC);
+}

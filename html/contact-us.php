@@ -54,12 +54,17 @@
     </nav>
     <main class="page contact-us-page">
         <section class="clean-block clean-form dark">
+            <?php
+            if(isset($_GET['success']) and $_GET['success']==1) {
+                echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Thank you for contacting us!</strong><br /></span></div>';
+            }
+            ?>
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Contact Us</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
                 </div>
-                <form>
+                <form method="post" action="../php/contactUs.php">
                     <div class="mb-3"><label class="form-label" for="name">Name</label><input class="form-control" type="text" id="name" name="name"></div>
                     <div class="mb-3"><label class="form-label" for="subject">Subject</label><input class="form-control" type="text" id="subject" name="subject"></div>
                     <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control" type="email" id="email" name="email"></div>

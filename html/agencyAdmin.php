@@ -1,6 +1,8 @@
 <?php
 require_once '../php/functions.php';
 session_start();
+$_SESSION['referer']=$_SERVER['REQUEST_URI'];
+
 $agency=$_SESSION['agencyID'];
 if(!isset($_SESSION['isAgency']))
 {
@@ -19,9 +21,9 @@ if(array_key_exists('ViewAgencies', $_POST))
 {
     header("Location:../html/agencyAdmin.php?AgencyView");
 }
-if(array_key_exists('ManageAgencies', $_POST))
+if(array_key_exists('ManagePictures', $_POST))
 {
-    header("Location:../html/agencyAdmin.php?ManageAgency");
+    header("Location:../html/agencyAdmin.php?ManagePictures");
 }
 if(array_key_exists('add', $_POST))
 {
@@ -55,6 +57,15 @@ if(array_key_exists('editAttraction', $_POST))
 {
     header("Location:../html/agencyAdmin.php?editAttraction");
 }
+$dataPoints = array(
+
+);
+$attractions=ViewAgencyAttractions($agency);
+for ($item=0;count($attractions)>$item;$item++)
+{
+    $dataPoints[] = array("x"=> $item, "y"=> $attractions[$item]['viewCount'], 'label'=>$attractions[$item]['name']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +80,32 @@ if(array_key_exists('editAttraction', $_POST))
     <link rel="stylesheet" href="assets/css/Navbar-Centered-Brand-icons.css">
     <link rel="stylesheet" href="assets/css/tourDive.css">
     <link rel="stylesheet" href="assets/css/vanilla-zoom.min.css">
+    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                exportEnabled: true,
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
+                title:{
+                    text: "Views"
+                },
+                axisY:{
+                    includeZero: true
+                },
+                data: [{
+                    type: "column", //change type to bar, line, area, pie, etc
+                    //indexLabel: "{y}", //Shows y value on all Data Points
+                    indexLabelFontColor: "#5A5757",
+                    indexLabelPlacement: "outside",
+                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart.render();
+
+        }
+    </script>
 </head>
 <style>
     table{
@@ -80,7 +117,7 @@ if(array_key_exists('editAttraction', $_POST))
 
 </style>
 
-<body>
+<body style="background-color: lightgrey">
     <div style="display: inline-flex;flex: auto;width: 100%;">
         <div style="width: fit-content;max-width: 20%;overflow-y: visible;display: inline-block;position: absolute;top: 74px;">
             <div class="accordion" role="tablist" id="accordion-1" style="margin-right: 1px;font-size: 16px;overflow: visible;display: inline-block;position: relative;">
@@ -89,8 +126,10 @@ if(array_key_exists('editAttraction', $_POST))
                     <div class="accordion-collapse collapse item-3" role="tabpanel" data-bs-parent="#accordion-1">
                         <div class="accordion-body">
                             <form>
-                            <div><button class="btn btn-primary text-start btn-adminPage" name="ViewLocations" type="submit">View Locations</button></div>
+                            <!--<div><button class="btn btn-primary text-start btn-adminPage" name="ViewLocations" type="submit">View Locations</button></div>-->
                             <div><button class="btn btn-primary text-start btn-adminPage" name="ViewAttractions" type="submit">View Attractions</button></div>
+                            <div><button class="btn btn-primary text-start btn-adminPage" name="ViewLocations" type="submit">Graphs</button></div>
+                            <div><button class="btn btn-primary text-start btn-adminPage" name="ManagePictures" type="submit">Graphs</button></div>
                             </form>
                         </div>
                     </div>
@@ -214,38 +253,32 @@ if(array_key_exists('editAttraction', $_POST))
                         }?>
 
                         <?php
-                        $logins=getAgenciesAll();
-                        $cities=getAllCities();
-                        if(isset($_GET['ManageAgency']))
+                        $logins=ViewAgencyAttractions($agency);
+                        if(isset($_GET['ManagePictures']))
                         {?>
                         <table style="width: fit-content" class="table">
+                            <form method="post" action="../php/UAC/addImages.php" enctype="multipart/form-data">
                             <thead class="table-dark">
                             <tr>
-                                <th>Agency_id</th>
-                                <th>Name</th>
-                                <th>HeadQuarters</th>
-                                <th>Status</th>
-                                <th>logo</th>
-                                <th></th>
-                                <th><form method="post"><input class="btn btn-primary" name="add" type="submit" value="Add"></form></th>
+                                <th>AttractionName</th>
+                                <th>Picture1</th>
+                                <th>Picture2</th>
+                                <th>Picture3</th>
+                                <th>Picture4</th>
                             </tr>
                             </thead>
                             <?php
-                            for($row=0;count($logins)>$row;$row++)
-                            {
-                                echo '<form method="post" action="../php/UAC/manageAgencies.php?row='.$row.'">';
-                                echo '<tr>';
-                                echo '<td class="" style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input class="form-control" type="text" name="'.$row.'agency_id" value="'.$logins[$row]['agency_id'].'"></div></td>';
-                                echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input class="form-control" type="text" name="'.$row.'name" value="'.$logins[$row]['name'].'"></div></td>';
-                                echo '<td>'.'<select class="form-select" name="'.$row.'cities" ><option selected value="'.$logins [$row]['city_name'].'">'.$logins[$row]['city_name'].'</option>.'; foreach ($cities as $city=>$item){ echo '<option value="'.$item['city_name'].'">'.$item['city_name'].'</option>';}echo '.</select></td>';
-                                echo '<td>'.'<select class="form-select" name="'.$row.'status" ><option selected value="'.$logins[$row]['status'].'">'.$logins[$row]['status'].'</option> <option value="enabled">enabled</option> <option value="disabled">disabled</option> </select></td>';
-                                echo '<td>'.'<input class="form-control" type="file" name="'.$row.'logo" value="'.$logins[$row]['logo'].'"></td>';
-                                echo '<td> <input class="btn-primary" type="submit" name="edit" value="Edit"> </td> </form>' ?>
-                                <?php
-                                echo '</tr>';
-                            }
-
-                            }?>
+                            echo '<tr>';?>
+                            <td> <select class="form-select" type="text" name="attractionID"><?php foreach ($logins as $key=>$item) { echo '<option value="'.$item['attraction_id'].'">'.$item['name'].'</option>'; }?></select></td>
+                            <td class="" style=""><input class="form-control" type="file" name="pic0"></td>
+                            <td class="" style=""><input class="form-control" type="file" name="pic1"></td>
+                            <td class="" style=""><input class="form-control" type="file" name="pic2"></td>
+                            <td class="" style=""><input class="form-control" type="file" name="pic3"></td>
+                            <td> <input class="btn btn-primary" type="submit" name="addAgency" value="Add"> </td></form>
+                            <?php echo '</tr>';
+                            ?>
+                        </table>
+                        <?php }?>
                             <?php
                             $logins=getAgenciesAll();
                             $cities=getAllCities();
@@ -278,32 +311,23 @@ if(array_key_exists('editAttraction', $_POST))
                             $logins=getAllCities();
                             if(isset($_GET['ViewLocations']))
                                 {?>
-                                <table style="width:auto" class="table">
-                                    <thead class="table-dark">
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>City Name</th>
-                                        <th></th>
-                                        <th><form><input class="btn btn-primary" type="submit" name="addCity" value="Add"></form></th>
-                                    </tr>
-                                    </thead>
-                                    <?php
-                                    for($row=0;count($logins)>$row;$row++)
-                                    {
-                                        echo '<tr>';
-                                        foreach ($logins[$row] as $key=>$item)
-                                        {
-
-                                            echo '<td>'.$item.'</td>';
-                                        }
-                                        ?>
-                                        <form method="post" action="../php/UAC/deleteLocation.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
-                                        <?php
-                                        echo '</tr>';
-                                    }
-
-                                    echo '</table>';
-                                    }?>
+                                <div class="container">
+                                    <div class="block-heading-fulcrum">
+                                        <h2 class="text-info">Views</h2>
+                                        <p>This chart shows the views on your agency's list of attractions</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div class="container-md travelItem">
+                                            <div class="col-md align-items-center">
+                                                <div class="col-md">
+                                                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                                    <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <?php }?>
                             <?php
                             if(isset($_GET['addCity']))
                                     {?>
@@ -322,7 +346,7 @@ if(array_key_exists('editAttraction', $_POST))
                                         </form>
                                         <?php }?>
                             <?php
-                            $logins=ViewAttractions();
+                            $logins=ViewAgencyAttractions($agency);
                             if(isset($_GET['ViewAttractions']))
                                         {?>
                                         <table style="width:auto" class="table">
@@ -391,7 +415,7 @@ if(array_key_exists('editAttraction', $_POST))
                                                         <td class="" style="min-width: 50px; max-width: 150px ;width: auto;"><input class="form-control" type="text" name="Longitude"></td>
                                                         <td class="" style="min-width: 50px; max-width: 150px ;width: auto;"><select class="form-select" type="text" name="Active"><option value="enable">Enabled</option><option value="disable">Disabled</option></select></td>
                                                         <?php
-                                                        echo '<td class="" style="min-width: 50px; max-width: 150px ;width: auto;"><select class="form-select" type="text" name="agency_id">.'; foreach ($agencies as $agency=>$item){ echo '<option value="'.$item['agency_id'].'">'.$item['name'].'</option>';} echo'</select></td>'; ?>
+                                                        echo '<td class="" style="min-width: 50px; max-width: 150px ;width: auto;"><select class="form-select" type="text" name="agency_id">.';  echo '<option value="'.$agency.'">'.getAgencyName($agency).'</option>'; echo'</select></td>'; ?>
                                                         <td><input class="btn btn-primary" type="submit" name="addAttract" value="Add"></td>
                                                     </tr>
                                                 </form>

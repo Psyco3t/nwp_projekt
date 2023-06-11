@@ -1,96 +1,64 @@
 <?php
-// Create database connection
-$db = mysqli_connect("localhost", "root", "", "test");
+require_once __DIR__.'/functions.php';
 
-// Initialize message variable
-$msg = "";
+$dataPoints = array(
+    array("x"=> 10, "y"=> 41),
+    array("x"=> 20, "y"=> 35, "indexLabel"=> "Lowest"),
+    array("x"=> 30, "y"=> 50),
+    array("x"=> 40, "y"=> 45),
+    array("x"=> 50, "y"=> 52),
+    array("x"=> 60, "y"=> 68),
+    array("x"=> 70, "y"=> 38),
+    array("x"=> 80, "y"=> 71, "indexLabel"=> "Highest"),
+    array("x"=> 90, "y"=> 52),
+    array("x"=> 100, "y"=> 60),
+    array("x"=> 110, "y"=> 36),
+    array("x"=> 120, "y"=> 49),
+    array("x"=> 130, "y"=> 41)
+);
+echo $uri=$_SERVER['HTTP_REFERER'];
 
-// If upload button is clicked ...
-if (isset($_POST['upload'])) {
-    // Get image name
-    $image = $_FILES['image']['name'];
-    // Get text
-    $image_text = mysqli_real_escape_string($db, $_POST['image_text']);
+$images=selectImages(12);
+var_dump($images);
 
-    // image file directory
-    $target = "../uploads/".basename($image);
-
-    $sql = "INSERT INTO images (image) VALUES ('$image')";
-    // execute query
-    mysqli_query($db, $sql);
-
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-        $msg = "Image uploaded successfully";
-    }else{
-        $msg = "Failed to upload image";
-    }
+if(str_contains($uri, 'test.php'))
+{
+    echo 'true';
 }
-$result = mysqli_query($db, "SELECT * FROM images");
+
+
 ?>
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Image Upload</title>
-    <style type="text/css">
-        #content{
-            width: 50%;
-            margin: 20px auto;
-            border: 1px solid #cbcbcb;
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                exportEnabled: true,
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
+                title:{
+                    text: "Simple Column Chart with Index Labels"
+                },
+                axisY:{
+                    includeZero: true
+                },
+                data: [{
+                    type: "column", //change type to bar, line, area, pie, etc
+                    //indexLabel: "{y}", //Shows y value on all Data Points
+                    indexLabelFontColor: "#5A5757",
+                    indexLabelPlacement: "outside",
+                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart.render();
+
         }
-        form{
-            width: 50%;
-            margin: 20px auto;
-        }
-        form div{
-            margin-top: 5px;
-        }
-        #img_div{
-            width: 80%;
-            padding: 5px;
-            margin: 15px auto;
-            border: 1px solid #cbcbcb;
-        }
-        #img_div:after{
-            content: "";
-            display: block;
-            clear: both;
-        }
-        img{
-            float: left;
-            margin: 5px;
-            width: 300px;
-            height: 140px;
-        }
-    </style>
+    </script>
 </head>
 <body>
-<div id="content">
-    <?php
-    while ($row = mysqli_fetch_array($result)) {
-        echo "<div id='img_div'>";
-        echo "<img src='../uploads/".$row['image']."' >";
-        //echo "<p>".$row['image_text']."</p>";
-        echo "</div>";
-    }
-    ?>
-    <form method="POST" action="test.php" enctype="multipart/form-data">
-        <input type="hidden" name="size" value="1000000">
-        <div>
-            <input type="file" name="image">
-        </div>
-        <div>
-      <textarea
-              id="text"
-              cols="40"
-              rows="4"
-              name="image_text"
-              placeholder="Say something about this image..."></textarea>
-        </div>
-        <div>
-            <button type="submit" name="upload">POST</button>
-        </div>
-    </form>
-</div>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 </body>
 </html>
-
