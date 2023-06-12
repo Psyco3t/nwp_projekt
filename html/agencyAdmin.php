@@ -129,7 +129,7 @@ for ($item=0;count($attractions)>$item;$item++)
                             <!--<div><button class="btn btn-primary text-start btn-adminPage" name="ViewLocations" type="submit">View Locations</button></div>-->
                             <div><button class="btn btn-primary text-start btn-adminPage" name="ViewAttractions" type="submit">View Attractions</button></div>
                             <div><button class="btn btn-primary text-start btn-adminPage" name="ViewLocations" type="submit">Graphs</button></div>
-                            <div><button class="btn btn-primary text-start btn-adminPage" name="ManagePictures" type="submit">Graphs</button></div>
+                            <div><button class="btn btn-primary text-start btn-adminPage" name="ManagePictures" type="submit">Add 4 Images</button></div>
                             </form>
                         </div>
                     </div>
@@ -144,10 +144,8 @@ for ($item=0;count($attractions)>$item;$item++)
                             </svg></span><span>Tour Dive</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-5"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-5">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link active" href="#">First Item</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Second Item</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
-                        </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Button</a>
+                            <li class="nav-item"><a class="nav-link active" href="agencyAdmin.php?generateQRCode">Generate Qr Code</a></li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -265,6 +263,7 @@ for ($item=0;count($attractions)>$item;$item++)
                                 <th>Picture2</th>
                                 <th>Picture3</th>
                                 <th>Picture4</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <?php
@@ -464,6 +463,45 @@ for ($item=0;count($attractions)>$item;$item++)
                                                     }
 
                                                     }?>
+                                                    <?php
+                                                    if (isset($_GET['generateQRCode']))
+                                                    {?>
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">URI</th>
+                                                            <th scope="col">Name</th>
+                                                            <!--<th scope="col">Subject</th>
+                                                            <th scope="col">Email</th>
+                                                            <th scope="col">Message</th>-->
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <form method="post" action="../php/UAC/generateQrCode.php" autocomplete="off">
+                                                                <td style="width: auto;"><div> <input class="form-control" type="text" name="name" placeholder="Enter Name here"></div></td>
+                                                                <td style="width: auto;"><div> <input class="form-control" type="text" name="uri" placeholder="enter URI here"></div></td>
+                                                                <td>  <input class="btn btn-secondary" type="submit" name="Generate" value="Generate"> </td>
+                                                            </form>
+                                                        </tr>
+
+                                                        <?php
+                                                        $codes=getQrCodes();
+                                                        for($row=0;count($codes)>$row;$row++)
+                                                        {
+                                                            echo '<tr>';
+
+                                                            echo '<td>'.$codes[$row]['file_name'].'</td>';
+                                                            echo '<td><img src="../qrCodes/'.$codes[$row]['file_name'].'.png" alt="qrCode"></td>';
+                                                            ?>
+                                                            <form method="post" action="../php/UAC/deleteQrCode.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
+                                                            <?php echo '</tr>';
+                                                        }
+                                                        ?>
+                                                        </tbody>
+                                                    </table>
+                                                    <?php }
+                                                    ?>
 
      </div>
     </div>

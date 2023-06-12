@@ -3,7 +3,8 @@
     "mobiledetect/mobiledetectlib": "^3.74",
     "phpmailer/phpmailer": "^6.8",
     "ext-mysqli": "*",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "chillerlan/php-qrcode": "^4.3"
   },
   "autoload": {
     "files": ["vendor/mobiledetect/mobiledetectlib/src/MobileDetect.php",

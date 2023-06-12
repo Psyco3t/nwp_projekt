@@ -334,3 +334,12 @@ function getContacts()
     $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
     return PDOexec("SELECT * FROM contact")->fetchAll(PDO::FETCH_ASSOC);
 }
+function getQrCodes()
+{
+    require_once 'config.php';
+    require_once 'db_config.php';
+    require_once 'functions.php';
+    require dirname(__DIR__).'/vendor/autoload.php';
+    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    return PDOexec("SELECT * FROM qr_code")->fetchAll(PDO::FETCH_ASSOC);
+}
