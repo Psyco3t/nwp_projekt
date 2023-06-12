@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2023 at 06:19 PM
+-- Generation Time: Jun 12, 2023 at 02:46 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -227,7 +227,8 @@ INSERT INTO `logs` (`user_id`, `browser`, `ip_address`, `LastLoginDate`, `device
 (1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-08', 'computer'),
 (1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-08', 'computer'),
 (1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-10', 'computer'),
-(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-11', 'computer');
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-11', 'computer'),
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-12', 'computer');
 
 -- --------------------------------------------------------
 
@@ -403,7 +404,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `qr_code`
 --
 ALTER TABLE `qr_code`
-  MODIFY `id_qr_code` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_qr_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
