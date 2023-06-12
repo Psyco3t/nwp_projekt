@@ -51,7 +51,7 @@ if(isset($_GET['token'])) {
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../html/gallery.php">Gallery</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" href="../html/gallery.php">Gallery</a></li>-->
                     <?php
                     session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -111,11 +111,11 @@ if(isset($_GET['token'])) {
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-primary">Log In</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                    <p>Here you can login with your credentials.</p>
                 </div>
                 <form style="background: rgba(255,255,255,0.76);" action="../php/UAC/login.php" method="post">
-                    <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" id="email" name="email"></div>
-                    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password" name="password"></div>
+                    <div class="mb-3"><label class="form-label" for="email">Email</label><input required class="form-control item" type="email" id="email" name="email"></div>
+                    <div class="mb-3"><label class="form-label" for="password">Password</label><input required class="form-control" type="password" id="password" name="password"></div>
                     <div class="mb-3" style="margin-top: -8px;margin-bottom: 0px;">
                         <div class="form-check" style="padding-right: 0px;margin-right: 259px;"><input class="form-check-input" type="checkbox" id="checkbox"><label class="form-check-label" for="checkbox">Remember me</label></div>
                     </div>

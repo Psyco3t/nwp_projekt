@@ -32,11 +32,11 @@ $link='../php/password/passwordFinish.php?token='.$token;
         <div class="container">
             <div class="block-heading">
                 <h2 class="text-info">Password Reset</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <p>Type in your new password.</p>
             </div>
             <form action="<?php echo $link?>" method="post">
-                <div class="mb-3"><label class="form-label" for="name">New Password</label><input class="form-control item" type="password" id="password" name="password"></div>
-                <div class="mb-3"><label class="form-label" for="password">Repeat Password</label><input class="form-control item" type="password" id="passwordRepeat" name="passwordRepeat">
+                <div class="mb-3"><label class="form-label" for="name">New Password</label><input required class="form-control item" type="password" id="password" name="password"></div>
+                <div class="mb-3"><label class="form-label" for="password">Repeat Password</label><input required class="form-control item" type="password" id="passwordRepeat" name="passwordRepeat">
                 </div><button class="btn btn-primary btn-tourDive-loginbtn" type="submit">Continue</button>
             </form>
         </div>

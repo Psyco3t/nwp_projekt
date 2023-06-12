@@ -20,7 +20,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../html/gallery.html">Gallery</a></li>
+                    <!--<li class="nav-item"><a class="nav-link" href="../html/gallery.html">Gallery</a></li>-->
                     <?php
                     session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -81,17 +81,17 @@
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Registration</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                    <p>Here you can register on our site so that you can add and favorite locations you would like to visit.</p>
                 </div>
                 <form style="background: rgba(255,255,255,0.76);" action="../php/register.php" method="post">
                     <div class="mb-3"><!--<label class="form-label" for="name">Username</label><input class="form-control item" type="text" name="username" id="name">-->
-                        <div class="mb-3"><label class="form-label" for="name">First Name</label><input class="form-control item" type="text" name="firstName" id="name-1">
-                            <div class="mb-3"><label class="form-label" for="name">Lastname</label><input class="form-control item" type="text" name="lastName" id="name-2"></div>
+                        <div class="mb-3"><label class="form-label" for="name">First Name</label><input required class="form-control item" type="text" name="firstName" id="name-1">
+                            <div class="mb-3"><label class="form-label" for="name">Lastname</label><input required class="form-control item" type="text" name="lastName" id="name-2"></div>
                         </div>
                     </div>
-                    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control item" type="password" name="password" id="password"></div>
-                    <div class="mb-3"><label class="form-label" for="password">Repeat Password</label><input class="form-control item" type="password" name="repeatPass" id="password-1"></div>
-                    <div class="mb-3"><label class="form-label" for="email">Email</label><input class="form-control item" type="email" name="email" id="email"></div><button class="btn btn-primary btn-tourDive-loginbtn" type="submit">Sign Up</button>
+                    <div class="mb-3"><label class="form-label" for="password">Password</label><input required class="form-control item" type="password" name="password" id="password"></div>
+                    <div class="mb-3"><label class="form-label" for="password">Repeat Password</label><input required  class="form-control item" type="password" name="repeatPass" id="password-1"></div>
+                    <div class="mb-3"><label class="form-label" for="email">Email</label><input required class="form-control item" type="email" name="email" id="email"></div><button class="btn btn-primary btn-tourDive-loginbtn" type="submit">Sign Up</button>
                 </form>
             </div>
         </section>

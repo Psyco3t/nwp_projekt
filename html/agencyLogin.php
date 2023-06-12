@@ -117,11 +117,11 @@ if(isset($_GET['token'])) {
         <div class="container">
             <div class="block-heading">
                 <h2 class="text-primary">Agency Login</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                <p>If you have forgotten your agency password please contact the site admins to change it for you.</p>
             </div>
             <form style="background: rgba(255,255,255,0.76);" action="../php/UAC/AgencyLogin.php" method="post">
-                <div class="mb-3"><label class="form-label" for="name">Agency Name</label><input class="form-control item" type="text" id="email" name="name"></div>
-                <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password" name="password"></div>
+                <div class="mb-3"><label class="form-label" for="name">Agency Name</label><input required class="form-control item" type="text" id="email" name="name"></div>
+                <div class="mb-3"><label class="form-label" for="password">Password</label><input required class="form-control" type="password" id="password" name="password"></div>
                 <div class="mb-3" style="margin-top: -8px;margin-bottom: 0px;">
                     <div class="form-check" style="padding-right: 0px;margin-right: 259px;"><input class="form-check-input" type="checkbox" id="checkbox"><label class="form-check-label" for="checkbox">Remember me</label></div>
                 </div>
