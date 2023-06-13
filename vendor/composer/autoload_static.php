@@ -8,9 +8,15 @@ class ComposerStaticInitc0ee4a62ccd78da125b6fa24ca232774
 {
     public static $files = array (
         '56d928e1bde81d4c6f4962757a0f61f1' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/src/MobileDetect.php',
+        '713e9985054b174273315f4923464197' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'c' => 
+        array (
+            'chillerlan\\Settings\\' => 20,
+            'chillerlan\\QRCode\\' => 18,
+        ),
         'P' => 
         array (
             'PHPMailer\\PHPMailer\\' => 20,
@@ -22,6 +28,14 @@ class ComposerStaticInitc0ee4a62ccd78da125b6fa24ca232774
     );
 
     public static $prefixDirsPsr4 = array (
+        'chillerlan\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-settings-container/src',
+        ),
+        'chillerlan\\QRCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',

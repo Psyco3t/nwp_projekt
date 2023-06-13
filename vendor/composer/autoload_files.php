@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '56d928e1bde81d4c6f4962757a0f61f1' => $vendorDir . '/mobiledetect/mobiledetectlib/src/MobileDetect.php',
+    '713e9985054b174273315f4923464197' => $vendorDir . '/phpmailer/phpmailer/src/PHPMailer.php',
 );

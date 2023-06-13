@@ -1,5 +1,7 @@
 <?php
+$directory='../';
 require_once '../php/functions.php';
+require_once $directory.'vendor/autoload.php';
 session_start();
 if(!isset($_SESSION['admin']))
 {
@@ -127,9 +129,8 @@ if(array_key_exists('editAttraction', $_POST))
                     <div class="collapse navbar-collapse" id="navcol-5">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item"><a class="nav-link active" href="admin.php?Contacts">Contact Page</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Generate QR code</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Third Item</a></li>
-                        </ul><a class="btn btn-primary ms-md-2" role="button" href="#">Button</a>
+                            <li class="nav-item"><a class="nav-link" href="admin.php?generateQRCode">Generate QR code</a></li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -487,7 +488,44 @@ if(array_key_exists('editAttraction', $_POST))
                                                             }?>
                                                         <form method="post" action="../php/UAC/deleteContact.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
                                                         <?php echo '</tr>';
-                                                        }?>
+                                                        }
+                                                    }?>
+
+                                                        <?php
+                                                        if (isset($_GET['generateQRCode']))
+                                                        {?>
+                                                            <table class="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th scope="col">URI</th>
+                                                                    <th scope="col">Name</th>
+                                                                    <!--<th scope="col">Subject</th>
+                                                                    <th scope="col">Email</th>
+                                                                    <th scope="col">Message</th>-->
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr>
+                                                                    <form method="post" action="../php/UAC/generateQrCode.php" autocomplete="off">
+                                                                    <td style="width: auto;"><div> <input class="form-control" type="text" name="name" placeholder="Enter Name here"></div></td>
+                                                                    <td style="width: auto;"><div> <input class="form-control" type="text" name="uri" placeholder="enter URI here"></div></td>
+                                                                    <td>  <input class="btn btn-secondary" type="submit" name="Generate" value="Generate"> </td>
+                                                                    </form>
+                                                                </tr>
+
+                                                                    <?php
+                                                                    $codes=getQrCodes();
+                                                                    for($row=0;count($codes)>$row;$row++)
+                                                                    {
+                                                                        echo '<tr>';
+
+                                                                        echo '<td>'.$codes[$row]['file_name'].'</td>';
+                                                                        echo '<td><img src="../qrCodes/'.$codes[$row]['file_name'].'.png" alt="qrCode"></td>';
+                                                                        ?>
+                                                                        <form method="post" action="../php/UAC/deleteQrCode.php?row=<?php echo $row?>"> <td> <input class="btn btn-secondary" type="submit" name="deleteBtn" value="delete"> </td> </form>
+                                                                        <?php echo '</tr>';
+                                                                    }
+                                                                    ?>
                                                         </tbody>
                                                     </table>
                                                     <?php }
