@@ -3,6 +3,7 @@ $directory='../';
 require_once '../php/functions.php';
 require_once $directory.'vendor/autoload.php';
 session_start();
+$_SESSION['referer']=$_SERVER['REQUEST_URI'];
 if(!isset($_SESSION['admin']))
 {
     header('Location:../index.php');
@@ -191,12 +192,12 @@ if(array_key_exists('editAttraction', $_POST))
                     {
                         echo '<form method="post" action="../php/UAC/updateRow.php?row='.$row.'">';
                         echo '<tr>';
-                        echo '<td class="" style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input class="form-control" type="text" name="'.$row.'id_user" value="'.$logins[$row]['id_user'].'"></div></td>';
-                        echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input class="form-control" type="text" name="'.$row.'first_name" value="'.$logins[$row]['first_name'].'"></div></td>';
-                        echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input class="form-control" type="text" name="'.$row.'last_name" value="'.$logins[$row]['last_name'].'"></div></td>';
-                        echo '<td>'.'<input class="form-control" type="text" name="'.$row.'email" value='.$logins[$row]['email'].'></td>';
+                        echo '<td class="" style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input autocomplete="off" class="form-control" type="text" name="'.$row.'id_user" value="'.$logins[$row]['id_user'].'"></div></td>';
+                        echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input autocomplete="off" class="form-control" type="text" name="'.$row.'first_name" value="'.$logins[$row]['first_name'].'"></div></td>';
+                        echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<div>'.'<input autocomplete="off" class="form-control" type="text" name="'.$row.'last_name" value="'.$logins[$row]['last_name'].'"></div></td>';
+                        echo '<td>'.'<input autocomplete="off" class="form-control" type="text" name="'.$row.'email" value='.$logins[$row]['email'].'></td>';
                         echo '<td>'.'<select class="form-control" name="'.$row.'permissions" ><option selected value="'.$logins[$row]['permissions'].'">'.$logins[$row]['permissions'].'</option> <option value="admin">admin</option> <option value="registered">registered</option> <option value="agency">agency</option> </select></td>';
-                        echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<input class="form-control" type="text" name="'.$row.'active" value="'.$logins[$row]['active'].'"></td>';
+                        echo '<td style="min-width: 50px; max-width: 180px ;width: auto;">'.'<select class="form-control" type="text" name="'.$row.'active"><option selected value="'.$logins[$row]['active'].'">'.$logins[$row]['active'].'<option value="0">0</option> <option value="1">1</option> </select></td>';
                         echo '<td> <input class="btn btn-secondary" type="submit" name="edit" value="Edit"> </td> </form>' ?>
                         <?php
                         echo '</tr>';
@@ -497,8 +498,8 @@ if(array_key_exists('editAttraction', $_POST))
                                                             <table class="table">
                                                                 <thead>
                                                                 <tr>
-                                                                    <th scope="col">URI</th>
                                                                     <th scope="col">Name</th>
+                                                                    <th scope="col">URI</th>
                                                                     <!--<th scope="col">Subject</th>
                                                                     <th scope="col">Email</th>
                                                                     <th scope="col">Message</th>-->
@@ -507,14 +508,14 @@ if(array_key_exists('editAttraction', $_POST))
                                                                 <tbody>
                                                                 <tr>
                                                                     <form method="post" action="../php/UAC/generateQrCode.php" autocomplete="off">
-                                                                    <td style="width: auto;"><div> <input class="form-control" type="text" name="name" placeholder="Enter Name here"></div></td>
-                                                                    <td style="width: auto;"><div> <input class="form-control" type="text" name="uri" placeholder="enter URI here"></div></td>
+                                                                    <td style="width: auto;"><div> <input required class="form-control" type="text" name="name" placeholder="Enter Name here"></div></td>
+                                                                    <td style="width: auto;"><div> <input required class="form-control" type="text" name="uri" placeholder="enter URI here"></div></td>
                                                                     <td>  <input class="btn btn-secondary" type="submit" name="Generate" value="Generate"> </td>
                                                                     </form>
                                                                 </tr>
 
                                                                     <?php
-                                                                    $codes=getQrCodes();
+                                                                    $codes=getQrCodes($_SESSION['uid']);
                                                                     for($row=0;count($codes)>$row;$row++)
                                                                     {
                                                                         echo '<tr>';

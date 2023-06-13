@@ -246,14 +246,14 @@ function checkAgencyStatus()
     return PDOexec("SELECT agency_id,name,city_name,status,logo FROM agencies WHERE status='enabled'")->rowCount();
 }
 
-function fetchFromList($userID)
+function fetchFromList($userID,$listname)
 {
     require_once 'config.php';
     require_once 'db_config.php';
     require_once 'functions.php';
     require dirname(__DIR__).'/vendor/autoload.php';
     $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
-    return PDOexec("SELECT * FROM attractions INNER JOIN tours ON attractions.attraction_id=tours.attraction_id INNER JOIN users ON tours.user_id=users.id_user WHERE user_id='$userID'")->fetchAll(PDO::FETCH_ASSOC);
+    return PDOexec("SELECT * FROM attractions INNER JOIN tourlist ON attractions.attraction_id=tourlist.attraction_id INNER JOIN users ON tourlist.user_id=users.id_user WHERE user_id='$userID' AND listname='$listname'")->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function fetchFromFavorites($userID)
@@ -334,12 +334,12 @@ function getContacts()
     $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
     return PDOexec("SELECT * FROM contact")->fetchAll(PDO::FETCH_ASSOC);
 }
-function getQrCodes()
+function getQrCodes($id)
 {
     require_once 'config.php';
     require_once 'db_config.php';
     require_once 'functions.php';
     require dirname(__DIR__).'/vendor/autoload.php';
     $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
-    return PDOexec("SELECT * FROM qr_code")->fetchAll(PDO::FETCH_ASSOC);
+    return PDOexec("SELECT id_qr_code,file_name,UID FROM qr_code WHERE UID='$id'")->fetchAll(PDO::FETCH_ASSOC);
 }

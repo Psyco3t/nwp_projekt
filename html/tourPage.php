@@ -56,7 +56,7 @@ $columnNum=countImages($attractions[$row]['attraction_id']);
                 }
                 elseif (isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                 {
-                    echo '<li class="nav-item"><a class="nav-link" href="about-us.php">Tour Cart</a></li>';
+                    echo '<li class="nav-item"><a class="nav-link" href="about-us.php">TourList</a></li>';
                     echo '<li class="nav-item"><a class="nav-link nav-link" href="favorites.php">Favorites</a></li>';
                     echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                 }
@@ -104,6 +104,9 @@ $columnNum=countImages($attractions[$row]['attraction_id']);
         if(isset($_GET['failure']) and $_GET['failure']==1) {
             echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Attraction already been added to your tour cart.</strong><br /></span></div>';
         }
+        if(isset($_GET['failure']) and $_GET['failure']==4) {
+            echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>You cannot add an attraction as an agency.</strong><br /></span></div>';
+        }
         ?>
         <div class="container">
             <div class="block-heading-fulcrum">
@@ -133,7 +136,7 @@ $columnNum=countImages($attractions[$row]['attraction_id']);
                                 </div>
                             </div>
                             <div class=col-md-4>
-                                <form method="post" action="../php/addToTourList.php?row=<?php echo $row?>">
+                                <form method="post" action="../html/tourcat.php?row=<?php echo $row?>">
                                 <button class="btn btn-primary-diveTours d-block w-100" type="submit">Add to TourList</button>
                                 </form>
                             </div>

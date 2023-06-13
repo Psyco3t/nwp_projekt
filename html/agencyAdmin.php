@@ -2,7 +2,6 @@
 require_once '../php/functions.php';
 session_start();
 $_SESSION['referer']=$_SERVER['REQUEST_URI'];
-
 $agency=$_SESSION['agencyID'];
 if(!isset($_SESSION['isAgency']))
 {
@@ -469,8 +468,8 @@ for ($item=0;count($attractions)>$item;$item++)
                                                     <table class="table">
                                                         <thead>
                                                         <tr>
-                                                            <th scope="col">URI</th>
                                                             <th scope="col">Name</th>
+                                                            <th scope="col">URI</th>
                                                             <!--<th scope="col">Subject</th>
                                                             <th scope="col">Email</th>
                                                             <th scope="col">Message</th>-->
@@ -479,14 +478,14 @@ for ($item=0;count($attractions)>$item;$item++)
                                                         <tbody>
                                                         <tr>
                                                             <form method="post" action="../php/UAC/generateQrCode.php" autocomplete="off">
-                                                                <td style="width: auto;"><div> <input class="form-control" type="text" name="name" placeholder="Enter Name here"></div></td>
-                                                                <td style="width: auto;"><div> <input class="form-control" type="text" name="uri" placeholder="enter URI here"></div></td>
+                                                                <td style="width: auto;"><div> <input required class="form-control" type="text" name="name" placeholder="Enter Name here"></div></td>
+                                                                <td style="width: auto;"><div> <input required class="form-control" type="text" name="uri" placeholder="enter URI here"></div></td>
                                                                 <td>  <input class="btn btn-secondary" type="submit" name="Generate" value="Generate"> </td>
                                                             </form>
                                                         </tr>
 
                                                         <?php
-                                                        $codes=getQrCodes();
+                                                        $codes=getQrCodes($_SESSION['agencyID']);
                                                         for($row=0;count($codes)>$row;$row++)
                                                         {
                                                             echo '<tr>';

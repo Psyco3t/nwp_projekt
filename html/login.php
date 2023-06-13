@@ -50,7 +50,7 @@ if(isset($_GET['token'])) {
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Tours.php">Tourlist</a></li>
                     <!--<li class="nav-item"><a class="nav-link" href="../html/gallery.php">Gallery</a></li>-->
                     <?php
                     session_start();

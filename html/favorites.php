@@ -30,7 +30,6 @@ $selectedTours=fetchFromFavorites($uid);
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
                     <?php
                     //session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -40,7 +39,7 @@ $selectedTours=fetchFromFavorites($uid);
                     }
                     elseif (isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                     {
-                        echo '<li class="nav-item"><a class="nav-link" href="about-us.php">Tour Cart</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link" href="about-us.php">Tourlist</a></li>';
                         echo '<li class="nav-item"><a class="nav-link nav-link" href="favorites.php">Favorites</a></li>';
                         echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                     }

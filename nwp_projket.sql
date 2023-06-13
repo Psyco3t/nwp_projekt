@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2023 at 02:46 PM
+-- Generation Time: Jun 13, 2023 at 06:06 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -70,9 +70,9 @@ CREATE TABLE `attractions` (
 --
 
 INSERT INTO `attractions` (`attraction_id`, `city_id`, `name`, `details`, `image`, `address`, `latitude`, `longitude`, `active`, `agency_id`, `viewCount`) VALUES
-(7, 5, 'Uj SzokoKut', 'Padok meg stb nagyon szep hely', 'Screenshot_20191229_201336.jpg', 'ohtid 52', 45.81463, 19.630385, 'enable', 7, 0),
-(12, 5, 'Test1', 'asdasdd', '4a Logo.png', 'Glavna 1', 45.813103, 19.631152, 'enable', 11, 3),
-(13, 1, 'Test2', 'asdasd', '4a Logo.png', 'adsasd', 45.813103, 19.631152, 'enable', 11, 1);
+(7, 5, 'Uj SzokoKut', 'Padok meg stb nagyon szep hely', 'Screenshot_20191229_201336.jpg', 'ohtid 52', 45.81463, 19.630385, 'enable', 7, 10),
+(12, 5, 'Test1', 'asdasdd', '4a Logo.png', 'Glavna 1', 45.813103, 19.631152, 'enable', 11, 8),
+(13, 1, 'Test2', 'asdasd', '4a Logo.png', 'adsasd', 45.813103, 19.631152, 'enable', 11, 4);
 
 -- --------------------------------------------------------
 
@@ -228,7 +228,12 @@ INSERT INTO `logs` (`user_id`, `browser`, `ip_address`, `LastLoginDate`, `device
 (1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-08', 'computer'),
 (1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-10', 'computer'),
 (1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/113.0', '127.0.0.1', '2023-06-11', 'computer'),
-(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-12', 'computer');
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-12', 'computer'),
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-13', 'computer'),
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-13', 'computer'),
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-13', 'computer'),
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-13', 'computer'),
+(1, 'mozilla/5.0 (windows nt 10.0; win64; x64; rv:109.0) gecko/20100101 firefox/114.0', '127.0.0.1', '2023-06-13', 'computer');
 
 -- --------------------------------------------------------
 
@@ -239,8 +244,32 @@ INSERT INTO `logs` (`user_id`, `browser`, `ip_address`, `LastLoginDate`, `device
 CREATE TABLE `qr_code` (
   `id_qr_code` int(11) NOT NULL,
   `file_name` varchar(256) NOT NULL,
-  `code` varchar(64) NOT NULL
+  `code` varchar(64) NOT NULL,
+  `UID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tourlist`
+--
+
+CREATE TABLE `tourlist` (
+  `id` int(11) NOT NULL,
+  `listname` varchar(32) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `attraction_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tourlist`
+--
+
+INSERT INTO `tourlist` (`id`, `listname`, `user_id`, `attraction_id`) VALUES
+(3, 'NewList', 1, 7),
+(12, 'NewStuff', 1, 13),
+(13, 'NewStuff', 1, 7),
+(14, 'NewList', 1, 13);
 
 -- --------------------------------------------------------
 
@@ -348,6 +377,12 @@ ALTER TABLE `qr_code`
   ADD PRIMARY KEY (`id_qr_code`);
 
 --
+-- Indexes for table `tourlist`
+--
+ALTER TABLE `tourlist`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tours`
 --
 ALTER TABLE `tours`
@@ -404,7 +439,13 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `qr_code`
 --
 ALTER TABLE `qr_code`
-  MODIFY `id_qr_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_qr_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `tourlist`
+--
+ALTER TABLE `tourlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `users`

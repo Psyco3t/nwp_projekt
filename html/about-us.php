@@ -3,7 +3,8 @@ require_once '../php/functions.php';
 session_start();
 $attractions=GetAttractions();
 $uid=$_SESSION['uid'];
-$selectedTours=fetchFromList($uid);
+//$selectedTours=fetchFromList($uid);
+$getList=PDOexec("SELECT DISTINCT `listname` FROM tourlist WHERE user_id='$uid'")->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <!DOCTYPE html>
@@ -23,14 +24,13 @@ $selectedTours=fetchFromList($uid);
     <link rel="stylesheet" href="../style/style.css">
 </head>
 
-<body>
+<body style="height: auto">
     <nav class="navbar navbar-light navbar-expand-lg fixed-top clean-navbar" style="background: #ef7b45;">
         <div class="container"><a class="navbar-brand logo" href="#">Tour Dive</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="../index.php">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="Tours.php">Tours</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.php">Gallery</a></li>
                     <?php
                     //session_start();
                     if(isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true and isset($_SESSION['isAgency']) and $_SESSION['isAgency']==true)
@@ -40,7 +40,7 @@ $selectedTours=fetchFromList($uid);
                     }
                     elseif (isset($_SESSION['loggedIN']) and $_SESSION['loggedIN']==true)
                     {
-                        echo '<li class="nav-item"><a class="nav-link" href="about-us.php">Tour Cart</a></li>';
+                        echo '<li class="nav-item"><a class="nav-link" href="about-us.php">Tourlist</a></li>';
                         echo '<li class="nav-item"><a class="nav-link nav-link" href="favorites.php">Favorites</a></li>';
                         echo '<li class="nav-item"><a class="nav-link nav-link" href="../php/logout.php">LogOut</a></li>';
                     }
@@ -63,13 +63,56 @@ $selectedTours=fetchFromList($uid);
         </div>
     </nav>
     <main class="page pricing-table-page">
+        <?php
+        if(isset($_GET['error']) and $_GET['error']==1) {
+            echo '<div class="alert alert-info text-primary alert-dismissible" role="alert" style="background: var(--bs-alert-border-color);padding: 20px 48px 16px 16px;"><button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button><span><strong>Something went wrong oops.</strong><br /></span></div>';
+        }
+        ?>
         <section class="clean-block clean-pricing dark" style="background: #cdedf6;">
             <div class="container">
                 <div class="block-heading-fulcrum">
-                    <h2 class="text-info">Tours in your cart</h2>
+                    <h2 class="text-info">Tours on your List</h2>
+                </div>
+                <div class="container-md " style="padding-bottom: 200px">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                            <form method="post" action="../php/getTourList.php">
+                                <label for="tourList">TourLists</label>
+                                <select style="margin-bottom: 15px" class="form-select" name="tourList">
+                                    <option selected disabled>
+                                        --Select--
+                                    </option>
+                                    <?php
+                                    for($row=0;count($getList)>$row;$row++) {
+
+
+                                        ?> <option value="<?php echo $getList[$row]['listname']?>"><?php echo $getList[$row]['listname']?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                                <input class="btn btn-primary-diveTours" type="submit" value="Select">
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
                 </div>
                 <div class="row justify-content-center">
-                    <?php for($row=0;$row<count($selectedTours);$row++)
+                    <?php if(isset($_GET['select']))
+                    {
+                        $listname=$_SESSION['listname'];
+                    $selectedTours=fetchFromList($uid,$listname);
+                    for($row=0;$row<count($selectedTours);$row++)
                     {
                     ?>
                     <div class="container-md travelItem" style="">
@@ -94,29 +137,12 @@ $selectedTours=fetchFromList($uid);
                                 <form method="post" action="../php/removeFromList.php?row=<?php echo $row?>&aId=<?php echo $selectedTours[$row]['attraction_id']?>">
                                     <button type="submit" name="remove" class="btn btn-primary-diveTours">Remove</button>
                                 </form>
-
                             </div>
                         </div>
                         <?php
                         }
+                        }
                          ?>
-                        <div class="container-md " style="padding-bottom: 200px">
-                            <div class="row align-items-center">
-                                <div class="col-md-4">
-
-                                </div>
-                                <div class="col-md-4">
-
-                                </div>
-                                <div class="col-md-4">
-
-                                </div>
-                                <div class="col-md-4">
-
-                                </div>
-                                <div class="col-md-4">
-                                </div>
-                            </div>
                     </div>
                 </div>
             </div>
