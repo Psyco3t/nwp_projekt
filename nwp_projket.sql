@@ -307,7 +307,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `password`, `new_password`, `email`, `token`, `permissions`, `active`, `registry_expires`, `activationToken`) VALUES
-(1, 'Gabor', 'Torda', '$2y$10$XoRnMQGg3hJft.8ThLDl7eBZrdS6cGmnBc2Z2CB7IjCYXprTwJjwO', '', 'assblast@usa.com', 'asd', 'admin', 1, '2022-12-03 15:45:51.000', NULL),
+(1, 'Gabor', 'Torda', '$2y$10$XoRnMQGg3hJft.8ThLDl7eBZrdS6cGmnBc2Z2CB7IjCYXprTwJjwO', '', 'nowblast@usa.com', 'asd', 'admin', 1, '2022-12-03 15:45:51.000', NULL),
 (15, 'Crassus', 'with', '$2y$10$BtU6w/SWq4amBq9BS/oel.Doy7Hg1RXInEeBab0be.cFaik2nrkbC', 'ZzwIjgApkHyuWakQowUlgPofXydDdwHzlEiiLwxV', 'notblast@gmail.com', '', 'registered', 1, '2023-03-15 15:03:08.000', 'RezJuiVzoRjoMppBapNslAlcCplUvoQnxOefSlhU');
 
 --
