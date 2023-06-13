@@ -61,10 +61,9 @@ if($_SESSION['loggedIN']==false)
 }
 else if ($rowCount>0)
 {
-    //echo $attractId;
-    //echo $getRow;
-    //header("Location:../html/tourPage.php?row=$getRow&failure=1");
-    //exit();
+
+    header("Location:../html/tourPage.php?row=$getRow&failure=1");
+    exit();
 }
 else if(!empty($_SESSION['agencyID']))
 {
