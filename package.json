@@ -2,6 +2,7 @@
   "name": "nwp_projekt",
   "version": "1.0.0",
   "dependencies": {
-    "@canvasjs/charts": "^3.7.7"
+    "@canvasjs/charts": "^3.7.7",
+    "jquery": "^3.7.0"
   }
 }

@@ -62,7 +62,7 @@ function LogRecord($username)
     require_once 'db_config.php';
     require_once 'functions.php';
     require dirname(__DIR__).'/vendor/autoload.php';
-    $dsn="mysql:host=localhost;dbname=nwp_projket;charset=UTF8";
+    $dsn="mysql:host=localhost;dbname=fulcrum;charset=UTF8";
     $detect = new MobileDetect();
     $browser = strtolower($_SERVER['HTTP_USER_AGENT']);
     $device = ($detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer');

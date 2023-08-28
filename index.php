@@ -57,7 +57,7 @@
         <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/tech/image4.jpg&quot;);color: rgba(94,177,191,0.79);">
             <div class="text">
                 <h2>Welcome to Tour Dive</h2>
-                <p>Here you can browse locations offered by our partners to check out or tour them click on the button below to learn more.</p><form action="html/faq.php"><button class="btn btn-outline-light btn-lg" type="button">Learn More</button></form>
+                <p>Here you can browse locations offered by our partners to check out or tour them click on the button below to learn more.</p><form action="html/faq.php"><button class="btn btn-outline-light btn-lg" type="submit">Learn More</button></form>
             </div>
         </section>
         <section class="clean-block clean-info dark" style="background: #cdedf6;">
