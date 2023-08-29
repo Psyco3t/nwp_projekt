@@ -22,6 +22,9 @@ $getList=PDOexec("SELECT DISTINCT `listname` FROM tourlist WHERE user_id='$uid'"
     <link rel="stylesheet" href="../../../../html/assets/css/tourDive.css">
     <link rel="stylesheet" href="../../../../html/assets/css/vanilla-zoom.min.css">
     <link rel="stylesheet" href="../../../../style/style.css">
+    <script type="text/JavaScript">setTimeout(() => {
+    document.location.reload();
+    }, 30000);</script>
 </head>
 
 <body style="height: auto">

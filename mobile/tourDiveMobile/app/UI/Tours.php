@@ -18,6 +18,9 @@ $attractions=GetAttractions();
     <link rel="stylesheet" href="../../../../html/assets/css/tourDive.css">
     <link rel="stylesheet" href="../../../../html/assets/css/vanilla-zoom.min.css">
     <link rel="stylesheet" href="../../../../style/style.css">
+    <script type="text/JavaScript">setTimeout(() => {
+    document.location.reload();
+    }, 20000);</script>
 
 <body>
     <main class="page pricing-table-page">

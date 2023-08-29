@@ -21,6 +21,9 @@ $selectedTours=fetchFromFavorites($uid);
     <link rel="stylesheet" href="../../../../html/assets/css/tourDive.css">
     <link rel="stylesheet" href="../../../../html/assets/css/vanilla-zoom.min.css">
     <link rel="stylesheet" href="../../../../style/style.css">
+    <script type="text/JavaScript">setTimeout(() => {
+    document.location.reload();
+    }, 3000);</script>
 </head>
 
 <body>
